@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#172b58">
+<title>Неделя русского языка и литературы</title>
+<style>
+:root{--blue:#203e78;--bg:#f1f4fa;--gold:#e5b84c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#26334d;font-family:Arial,sans-serif}
+header{background:linear-gradient(135deg,#14264c,#4168ad);color:white;text-align:center;padding:48px 18px}
+header h1{font-size:clamp(27px,5vw,43px);margin:0 0 12px}
+header p{margin:7px}
+nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:15px}
+button{border:0;background:var(--blue);color:white;padding:13px 19px;border-radius:10px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+nav button{background:white;color:var(--blue);border:1px solid #dce3ef}
+main{max-width:900px;margin:20px auto;padding:0 14px}
+.card{background:white;border-radius:17px;padding:24px;margin-bottom:18px;box-shadow:0 5px 22px #172b5812}
+h2{color:var(--blue);margin-top:0}
+input,select{width:100%;padding:14px;border:1px solid #cbd5e5;border-radius:9px;font-size:16px;margin:8px 0 16px}
+.field{font-weight:bold}
+.hidden{display:none!important}
+.notice{padding:14px;background:#fff6df;border-radius:10px;color:#795717}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:20px 0}
+.features div{background:#f2f5fb;padding:16px;border-radius:12px}
+.question{border:1px solid #e0e6f0;border-radius:12px;padding:18px;margin:15px 0}
+.question h3{font-size:18px;margin:0 0 13px}
+.option{display:flex;gap:11px;padding:12px;border-radius:8px;cursor:pointer}
+.option:hover{background:#f2f5fb}
+.option input{width:auto;margin:3px 0 0}
+.status{padding:13px;border-radius:10px;background:#eef3fc;margin:14px 0}
+.status.good{background:#e5f6e9;color:#21663b}
+.status.bad{background:#fff0ed;color:#963d32}
+.muted{color:#718096;font-size:14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.tabs button{background:#e9eef8;color:#263c69}
+.tabs button.active{background:var(--blue);color:white}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:440px}
+td,th{padding:11px;border-bottom:1px solid #e5eaf2;text-align:left}
+th{background:#f3f6fb}
+.bigscore{font-size:48px;font-weight:bold;color:var(--blue)}
+footer{text-align:center;padding:25px;color:#78849a}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Неделя русского языка и литературы</h1>
+  <p>2–6 ноября 2026 года</p>
+  <p>Интеллектуальная викторина для 5–7 классов</p>
+</header>
+
+<nav>
+  <button onclick="showPage('home')">Главная</button>
+  <button onclick="showPage('quiz')">Викторина</button>
+  <button onclick="showPage('rating')">Рейтинг</button>
+</nav>
+
+<main>
+<section id="home" class="card">
+  <h2>Добро пожаловать!</h2>
+  <p>Проверь свои знания русского языка и литературы в нашей школьной викторине!</p>
+  <div class="features">
+    <div><b>5 дней</b><br>Новые задания каждый день</div>
+    <div><b>10 вопросов</b><br>В каждом комплекте</div>
+    <div><b>2 попытки</b><br>На каждый вопрос</div>
+    <div><b>От 8 баллов</b><br>Сладкий приз!</div>
+  </div>
+  <p class="notice">Викторина проводится с 2 по 6 ноября 2026 года по времени Астаны.</p>
+  <button onclick="showPage('quiz')">Принять участие</button>
+</section>
+
+<section id="quiz" class="card hidden">
+  <h2>Участие в викторине</h2>
+
+  <div id="registration">
+    <label class="field" for="name">Фамилия, имя и отчество</label>
+    <input id="name" maxlength="100" placeholder="Иванов Иван Иванович">
+
+    <label class="field" for="grade">Класс</label>
+    <select id="grade">
+      <option value="">Выбери класс</option>
+      <option value="5">5 класс</option>
+      <option value="6">6 класс</option>
+      <option value="7">7 класс</option>
+    </select>
+
+    <button id="startButton" onclick="startQuiz()">Начать викторину</button>
+    <p id="startMessage" class="muted"></p>
+  </div>
+
+  <div id="quizArea" class="hidden">
+    <p id="questionProgress" class="muted"></p>
+    <div id="questionBox"></div>
+    <div id="answerStatus" class="status">Выбери один вариант ответа.</div>
+    <button id="answerButton" onclick="sendAnswer()">Ответить</button>
+  </div>
+
+  <div id="resultArea" class="hidden"></div>
+</section>
+
+<section id="rating" class="card hidden">
+  <h2>Рейтинг участников</h2>
+  <div class="tabs">
+    <button class="active" onclick="loadRating('overall',this)">Общий</button>
+    <button onclick="loadRating('grade5',this)">5 классы</button>
+    <button onclick="loadRating('grade6',this)">6 классы</button>
+    <button onclick="loadRating('grade7',this)">7 классы</button>
+  </div>
+  <div id="ratingContent">Загружаем результаты...</div>
+  <button onclick="refreshRating()">Обновить рейтинг</button>
+</section>
+</main>
+
+<footer>Неделя русского языка и литературы • 2026</footer>
+
+<script>
+const API_URL='https://script.google.com/macros/s/AKfycbyOQOgILmAmlrL1Y8xpBun4lLcbyhlmBvGIa5PVPsiv91akMjdkunIwkm2OPS1V_dGC/exec';
+
+let attemptId='';
+let currentQuestion=null;
+let currentRating='overall';
+let sending=false;
+
+function showPage(id){
+  ['home','quiz','rating'].forEach(x=>{
+    document.getElementById(x).classList.toggle('hidden',x!==id);
+  });
+  if(id==='rating')refreshRating();
+}
+
+function api(params){
+  return new Promise((resolve,reject)=>{
+    const callback='quizCallback'+Math.random().toString(36).slice(2);
+    const script=document.createElement('script');
+    const query=new URLSearchParams({...params,callback}).toString();
+
+    const timeout=setTimeout(()=>{
+      cleanup();
+      reject(new Error('Сервер не ответил. Проверь интернет.'));
+    },25000);
+
+    function cleanup(){
+      clearTimeout(timeout);
+      delete window[callback];
+      script.remove();
+    }
+
+    window[callback]=data=>{
+      cleanup();
+      resolve(data);
+    };
+
+    script.onerror=()=>{
+      cleanup();
+      reject(new Error('Не удалось подключиться к серверу.'));
+    };
+
+    script.src=API_URL+'?'+query;
+    document.body.appendChild(script);
+  });
+}
+
+async function startQuiz(){
+  const name=document.getElementById('name').value.trim();
+  const grade=document.getElementById('grade').value;
+  const button=document.getElementById('startButton');
+  const message=document.getElementById('startMessage');
+
+  if(!name||!grade){
+    message.textContent='Заполни ФИО и выбери класс.';
+    return;
+  }
+
+  button.disabled=true;
+  message.textContent='Подготавливаем вопросы...';
+
+  try{
+    const data=await api({action:'start',name,grade});
+
+    if(!data.ok){
+      message.textContent=data.error;
+      button.disabled=false;
+      return;
+    }
+
+    attemptId=data.id;
+    document.getElementById('registration').classList.add('hidden');
+    document.getElementById('quizArea').classList.remove('hidden');
+    document.getElementById('resultArea').classList.add('hidden');
+    showQuestion(data.question);
+  }catch(err){
+    message.textContent=err.message;
+    button.disabled=false;
+  }
+}
+
+function showQuestion(q){
+  currentQuestion=q;
+  document.getElementById('questionProgress').textContent=
+    'Вопрос '+q.number+' из '+q.total+
+    ' • Осталось попыток: '+(2-q.triesUsed);
+
+  const box=document.getElementById('questionBox');
+  box.replaceChildren();
+
+  const title=document.createElement('h3');
+  title.textContent=q.question;
+  box.appendChild(title);
+
+  q.options.forEach((option,index)=>{
+    const label=document.createElement('label');
+    label.className='option';
+
+    const radio=document.createElement('input');
+    radio.type='radio';
+    radio.name='answer';
+    radio.value=String(index+1);
+
+    const text=document.createElement('span');
+    text.textContent=option;
+
+    label.appendChild(radio);
+    label.appendChild(text);
+    box.appendChild(label);
+  });
+
+  const status=document.getElementById('answerStatus');
+  status.className='status';
+  status.textContent='Выбери один вариант ответа.';
+
+  const button=document.getElementById('answerButton');
+  button.disabled=false;
+  button.textContent='Ответить';
+}
+
+async function sendAnswer(){
+  if(sending||!attemptId)return;
+
+  const selected=document.querySelector('input[name="answer"]:checked');
+  if(!selected){
+    setStatus('Сначала выбери вариант ответа.','bad');
+    return;
+  }
+
+  sending=true;
+  const button=document.getElementById('answerButton');
+  button.disabled=true;
+  button.textContent='Проверяем...';
+
+  try{
+    const data=await api({
+      action:'answer',
+      id:attemptId,
+      choice:selected.value
+    });
+
+    if(!data.ok){
+      setStatus(data.error,'bad');
+      button.disabled=false;
+      button.textContent='Ответить';
+      return;
+    }
+
+    if(data.finished){
+      showResult(data);
+      return;
+    }
+
+    if(data.correct){
+      setStatus('Правильно! Молодец!','good');
+    }else{
+      setStatus(data.message,'bad');
+    }
+
+    setTimeout(()=>{
+      showQuestion(data.question);
+    },900);
+
+  }catch(err){
+    setStatus(err.message,'bad');
+    button.disabled=false;
+    button.textContent='Повторить отправку';
+  }finally{
+    sending=false;
+  }
+}
+
+function setStatus(message,type){
+  const box=document.getElementById('answerStatus');
+  box.textContent=message;
+  box.className='status '+type;
+}
+
+function showResult(data){
+  attemptId='';
+
+  document.getElementById('quizArea').classList.add('hidden');
+  const area=document.getElementById('resultArea');
+  area.classList.remove('hidden');
+
+  const heading=data.prize
+    ? 'Поздравляем! Ты получаешь сладкий приз! 🎉'
+    : 'Спасибо за участие!';
+
+  area.innerHTML=`
+    <div class="result">
+      <h2>Викторина завершена</h2>
+      <div class="bigscore">${data.score} / ${data.total}</div>
+      <p>${heading}</p>
+      <p>${data.prize
+        ? 'Ты набрал(а) не менее '+data.threshold+' правильных ответов.'
+        : 'Для получения приза нужно набрать не менее '+data.threshold+' правильных ответов.'}</p>
+      <button onclick="showPage('rating')">Посмотреть рейтинг</button>
+    </div>
+  `;
+}
+
+async function refreshRating(){
+  const box=document.getElementById('ratingContent');
+  box.textContent='Загружаем рейтинг...';
+
+  try{
+    const data=await api({action:'leaderboard'});
+    if(!data.ok)throw new Error(data.error);
+    renderRating(data[currentRating]||[]);
+  }catch(err){
+    box.textContent=err.message;
+  }
+}
+
+function loadRating(type,button){
+  currentRating=type;
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+  button.classList.add('active');
+  refreshRating();
+}
+
+function renderRating(list){
+  const box=document.getElementById('ratingContent');
+
+  if(!list.length){
+    box.textContent='Пока результатов нет.';
+    return;
+  }
+
+  const table=document.createElement('table');
+  table.innerHTML='<thead><tr><th>Место</th><th>Участник</th><th>Класс</th><th>Баллы</th><th>Приз</th></tr></thead>';
+
+  const body=document.createElement('tbody');
+
+  list.forEach((item,index)=>{
+    const tr=document.createElement('tr');
+    [
+      index+1,
+      item.name,
+      item.grade,
+      item.score+'/10',
+      item.prize
+    ].forEach(value=>{
+      const td=document.createElement('td');
+      td.textContent=value;
+      tr.appendChild(td);
+    });
+    body.appendChild(tr);
+  });
+
+  table.appendChild(body);
+  const wrap=document.createElement('div');
+  wrap.className='table-wrap';
+  wrap.appendChild(table);
+  box.replaceChildren(wrap);
+}
+</script>
+</body>
+</html>
