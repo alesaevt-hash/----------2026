@@ -2,378 +2,844 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#172b58">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Неделя русского языка и литературы</title>
 <style>
-:root{--blue:#203e78;--bg:#f1f4fa;--gold:#e5b84c}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:#26334d;font-family:Arial,sans-serif}
-header{background:linear-gradient(135deg,#14264c,#4168ad);color:white;text-align:center;padding:48px 18px}
-header h1{font-size:clamp(27px,5vw,43px);margin:0 0 12px}
-header p{margin:7px}
-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:15px}
-button{border:0;background:var(--blue);color:white;padding:13px 19px;border-radius:10px;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.5;cursor:not-allowed}
-nav button{background:white;color:var(--blue);border:1px solid #dce3ef}
-main{max-width:900px;margin:20px auto;padding:0 14px}
-.card{background:white;border-radius:17px;padding:24px;margin-bottom:18px;box-shadow:0 5px 22px #172b5812}
-h2{color:var(--blue);margin-top:0}
-input,select{width:100%;padding:14px;border:1px solid #cbd5e5;border-radius:9px;font-size:16px;margin:8px 0 16px}
-.field{font-weight:bold}
-.hidden{display:none!important}
-.notice{padding:14px;background:#fff6df;border-radius:10px;color:#795717}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:20px 0}
-.features div{background:#f2f5fb;padding:16px;border-radius:12px}
-.question{border:1px solid #e0e6f0;border-radius:12px;padding:18px;margin:15px 0}
-.question h3{font-size:18px;margin:0 0 13px}
-.option{display:flex;gap:11px;padding:12px;border-radius:8px;cursor:pointer}
-.option:hover{background:#f2f5fb}
-.option input{width:auto;margin:3px 0 0}
-.status{padding:13px;border-radius:10px;background:#eef3fc;margin:14px 0}
-.status.good{background:#e5f6e9;color:#21663b}
-.status.bad{background:#fff0ed;color:#963d32}
-.muted{color:#718096;font-size:14px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
-.tabs button{background:#e9eef8;color:#263c69}
-.tabs button.active{background:var(--blue);color:white}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:440px}
-td,th{padding:11px;border-bottom:1px solid #e5eaf2;text-align:left}
-th{background:#f3f6fb}
-.bigscore{font-size:48px;font-weight:bold;color:var(--blue)}
-footer{text-align:center;padding:25px;color:#78849a}
+:root {
+  --blue:#243b64;
+  --blue2:#365b91;
+  --gold:#e9b84c;
+  --bg:#f3f5fa;
+  --white:#fff;
+  --text:#202b3c;
+  --muted:#68758a;
+  --border:#dce2ec;
+  --red:#bd4141;
+  --green:#23834d;
+}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+}
+header {
+  background:linear-gradient(135deg,#1c3154,#3b6096);
+  color:white;
+  padding:30px 18px;
+  text-align:center;
+}
+header .symbol {font-size:38px}
+header h1 {margin:10px 0;font-size:clamp(24px,5vw,38px)}
+header p {margin:7px 0;color:#e2e9f4}
+nav {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:13px;
+  background:white;
+  box-shadow:0 2px 8px #0000000c;
+}
+button,.navbtn {
+  border:0;
+  border-radius:9px;
+  padding:11px 16px;
+  font-size:15px;
+  cursor:pointer;
+  background:var(--blue);
+  color:white;
+}
+button:hover,.navbtn:hover {filter:brightness(1.12)}
+button.secondary {background:#e9edf5;color:var(--blue)}
+button.danger {background:var(--red)}
+button.success {background:var(--green)}
+button:disabled {opacity:.55;cursor:not-allowed}
+main {max-width:1050px;margin:25px auto;padding:0 15px}
+.page {display:none}
+.page.active {display:block}
+.card {
+  background:white;
+  border-radius:15px;
+  padding:22px;
+  margin-bottom:18px;
+  box-shadow:0 4px 18px #15294a0b;
+  border:1px solid var(--border);
+}
+h2 {color:var(--blue);margin-top:0}
+h3 {color:var(--blue)}
+.hero {
+  text-align:center;
+  padding:35px 22px;
+  background:linear-gradient(145deg,#fff,#edf2fa);
+}
+.hero .big {font-size:48px}
+.hero h2 {font-size:28px}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:14px;
+}
+.tile {
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fafbfe;
+}
+label {display:block;font-weight:bold;margin:13px 0 6px}
+input,select,textarea {
+  width:100%;
+  border:1px solid #cbd4e2;
+  border-radius:8px;
+  padding:12px;
+  font-size:16px;
+  background:white;
+  color:var(--text);
+}
+textarea {min-height:75px;resize:vertical}
+.small {font-size:13px;color:var(--muted)}
+.muted {color:var(--muted)}
+.notice {
+  background:#fff7df;
+  border-left:4px solid var(--gold);
+  padding:12px 14px;
+  border-radius:7px;
+  margin:12px 0;
+}
+.successText {color:var(--green);font-weight:bold}
+.errorText {color:var(--red);font-weight:bold}
+.question {
+  font-size:21px;
+  font-weight:bold;
+  line-height:1.4;
+  margin:20px 0;
+}
+.option {
+  display:block;
+  width:100%;
+  text-align:left;
+  margin:9px 0;
+  background:#f4f6fa;
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:14px;
+}
+.option.selected {border:2px solid var(--blue2);background:#eaf0fa}
+.option:disabled {opacity:1}
+.progress {
+  height:9px;
+  border-radius:20px;
+  background:#e5e9f0;
+  overflow:hidden;
+}
+.progress div {height:100%;background:var(--gold);width:0}
+table {width:100%;border-collapse:collapse;margin-top:12px}
+th,td {padding:10px;border-bottom:1px solid var(--border);text-align:left}
+th {background:#edf1f7;color:var(--blue)}
+.tableWrap {overflow-x:auto}
+.adminActions {display:flex;gap:7px;flex-wrap:wrap}
+.adminActions button {font-size:13px;padding:8px 10px}
+.formGrid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+}
+footer {
+  text-align:center;
+  padding:25px;
+  color:var(--muted);
+  font-size:13px;
+}
+hr {border:0;border-top:1px solid var(--border);margin:20px 0}
+.hidden {display:none!important}
+#message {margin:12px 0;min-height:22px}
+.pill {
+  display:inline-block;
+  border-radius:20px;
+  background:#edf1f7;
+  padding:5px 10px;
+  font-size:13px;
+}
+@media(max-width:600px) {
+  .card {padding:16px}
+  nav button {padding:10px 12px;font-size:14px}
+  th,td {padding:8px;font-size:13px}
+}
 </style>
 </head>
 <body>
 
 <header>
+  <div class="symbol">📚 ✨</div>
   <h1>Неделя русского языка и литературы</h1>
   <p>2–6 ноября 2026 года</p>
-  <p>Интеллектуальная викторина для 5–7 классов</p>
+  <p>Викторина для учащихся 5, 6 и 7 классов</p>
 </header>
 
 <nav>
   <button onclick="showPage('home')">Главная</button>
   <button onclick="showPage('quiz')">Викторина</button>
   <button onclick="showPage('rating')">Рейтинг</button>
+  <button class="secondary" onclick="showPage('adminLogin')">🔐 Администрация</button>
 </nav>
 
 <main>
-<section id="home" class="card">
-  <h2>Добро пожаловать!</h2>
-  <p>Проверь свои знания русского языка и литературы в нашей школьной викторине!</p>
-  <div class="features">
-    <div><b>5 дней</b><br>Новые задания каждый день</div>
-    <div><b>10 вопросов</b><br>В каждом комплекте</div>
-    <div><b>2 попытки</b><br>На каждый вопрос</div>
-    <div><b>От 8 баллов</b><br>Сладкий приз!</div>
+
+<section id="home" class="page active">
+  <div class="card hero">
+    <div class="big">📝</div>
+    <h2>Добро пожаловать!</h2>
+    <p>Проверь свои знания русского языка и литературы в нашей школьной викторине.</p>
+    <p><strong>Каждый день — новые вопросы!</strong></p>
+    <button onclick="showPage('quiz')">Начать викторину</button>
   </div>
-  <p class="notice">Викторина проводится с 2 по 6 ноября 2026 года по времени Астаны.</p>
-  <button onclick="showPage('quiz')">Принять участие</button>
+
+  <div class="grid">
+    <div class="card tile">
+      <h3>📅 Даты проведения</h3>
+      <p>Со 2 по 6 ноября 2026 года.</p>
+    </div>
+    <div class="card tile">
+      <h3>❓ Вопросы</h3>
+      <p>10 вопросов для каждого участника каждый день.</p>
+    </div>
+    <div class="card tile">
+      <h3>🔁 Две попытки</h3>
+      <p>На каждый вопрос даются две попытки.</p>
+    </div>
+    <div class="card tile">
+      <h3>🍬 Сладкий приз</h3>
+      <p>Для получения приза необходимо набрать не менее <span id="homeThreshold">8</span> правильных ответов.</p>
+    </div>
+  </div>
 </section>
 
-<section id="quiz" class="card hidden">
-  <h2>Участие в викторине</h2>
+<section id="quiz" class="page">
+  <div class="card">
+    <h2>Участие в викторине</h2>
+    <div id="registration">
+      <p>Введи свои данные, чтобы начать.</p>
+      <label for="participantName">Фамилия, имя и отчество</label>
+      <input id="participantName" maxlength="100" placeholder="Например: Иванов Иван Иванович">
+      <label for="participantGrade">Класс</label>
+      <select id="participantGrade">
+        <option value="">Выбери класс</option>
+        <option value="5">5 класс</option>
+        <option value="6">6 класс</option>
+        <option value="7">7 класс</option>
+      </select>
+      <button id="startButton" onclick="startQuiz()">Начать викторину</button>
+    </div>
 
-  <div id="registration">
-    <label class="field" for="name">Фамилия, имя и отчество</label>
-    <input id="name" maxlength="100" placeholder="Иванов Иван Иванович">
+    <div id="quizArea" class="hidden">
+      <div class="row">
+        <span class="pill" id="questionCounter">Вопрос 1 из 10</span>
+        <span class="pill" id="scoreCounter">Правильных ответов: 0</span>
+      </div>
+      <br>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="question" id="questionText"></div>
+      <div id="options"></div>
+      <p id="answerMessage"></p>
+      <p class="small" id="attemptsText"></p>
+    </div>
 
-    <label class="field" for="grade">Класс</label>
-    <select id="grade">
-      <option value="">Выбери класс</option>
-      <option value="5">5 класс</option>
-      <option value="6">6 класс</option>
-      <option value="7">7 класс</option>
-    </select>
-
-    <button id="startButton" onclick="startQuiz()">Начать викторину</button>
-    <p id="startMessage" class="muted"></p>
+    <div id="quizResult" class="hidden"></div>
+    <div id="quizMessage"></div>
   </div>
-
-  <div id="quizArea" class="hidden">
-    <p id="questionProgress" class="muted"></p>
-    <div id="questionBox"></div>
-    <div id="answerStatus" class="status">Выбери один вариант ответа.</div>
-    <button id="answerButton" onclick="sendAnswer()">Ответить</button>
-  </div>
-
-  <div id="resultArea" class="hidden"></div>
 </section>
 
-<section id="rating" class="card hidden">
-  <h2>Рейтинг участников</h2>
-  <div class="tabs">
-    <button class="active" onclick="loadRating('overall',this)">Общий</button>
-    <button onclick="loadRating('grade5',this)">5 классы</button>
-    <button onclick="loadRating('grade6',this)">6 классы</button>
-    <button onclick="loadRating('grade7',this)">7 классы</button>
+<section id="rating" class="page">
+  <div class="card">
+    <h2>🏆 Рейтинг участников</h2>
+    <p class="muted">Результаты всех завершённых викторин.</p>
+    <button onclick="refreshRating()">Обновить рейтинг</button>
+    <div id="ratingContent">Нажми «Обновить рейтинг».</div>
   </div>
-  <div id="ratingContent">Загружаем результаты...</div>
-  <button onclick="refreshRating()">Обновить рейтинг</button>
 </section>
+
+<section id="adminLogin" class="page">
+  <div class="card" style="max-width:480px;margin:20px auto">
+    <h2>🔐 Вход в администрацию</h2>
+    <p>Этот раздел предназначен для организатора викторины.</p>
+    <label for="adminPassword">Пароль администратора</label>
+    <input id="adminPassword" type="password" placeholder="Введи пароль">
+    <br><br>
+    <button id="loginButton" onclick="adminLogin()">Войти</button>
+    <div id="loginMessage"></div>
+  </div>
+</section>
+
+<section id="admin" class="page">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+      <h2>⚙️ Панель администратора</h2>
+      <button class="danger" onclick="adminLogout()">Выйти</button>
+    </div>
+    <p class="successText">Вход выполнен.</p>
+    <div class="grid">
+      <button onclick="adminTab('questions')">📝 Вопросы</button>
+      <button onclick="adminTab('results')">🏆 Результаты</button>
+      <button onclick="adminTab('settings')">⚙️ Настройки</button>
+    </div>
+  </div>
+
+  <div id="adminQuestions" class="adminTab">
+    <div class="card">
+      <h2>Управление вопросами</h2>
+      <p class="small">Здесь можно добавлять новые вопросы, изменять существующие и удалять их.</p>
+      <button onclick="loadAdminQuestions()">Обновить список</button>
+      <button class="success" onclick="newQuestion()">+ Новый вопрос</button>
+      <div id="questionList"></div>
+    </div>
+
+    <div id="questionEditor" class="card hidden">
+      <h2 id="editorTitle">Новый вопрос</h2>
+      <input type="hidden" id="editRow">
+      <label for="qDate">Дата</label>
+      <select id="qDate">
+        <option value="2026-11-02">2 ноября 2026</option>
+        <option value="2026-11-03">3 ноября 2026</option>
+        <option value="2026-11-04">4 ноября 2026</option>
+        <option value="2026-11-05">5 ноября 2026</option>
+        <option value="2026-11-06">6 ноября 2026</option>
+      </select>
+      <label for="qGrade">Класс</label>
+      <select id="qGrade">
+        <option value="5">5 класс</option>
+        <option value="6">6 класс</option>
+        <option value="7">7 класс</option>
+      </select>
+      <label for="qText">Текст вопроса</label>
+      <textarea id="qText" placeholder="Напиши вопрос"></textarea>
+      <div class="formGrid">
+        <div><label for="q1">Вариант 1</label><input id="q1"></div>
+        <div><label for="q2">Вариант 2</label><input id="q2"></div>
+        <div><label for="q3">Вариант 3</label><input id="q3"></div>
+        <div><label for="q4">Вариант 4</label><input id="q4"></div>
+      </div>
+      <label for="qCorrect">Номер правильного ответа</label>
+      <select id="qCorrect">
+        <option value="1">Вариант 1</option>
+        <option value="2">Вариант 2</option>
+        <option value="3">Вариант 3</option>
+        <option value="4">Вариант 4</option>
+      </select>
+      <br><br>
+      <button class="success" onclick="saveQuestion()">Сохранить вопрос</button>
+      <button class="secondary" onclick="closeEditor()">Отмена</button>
+      <div id="editorMessage"></div>
+    </div>
+  </div>
+
+  <div id="adminResults" class="adminTab hidden">
+    <div class="card">
+      <h2>Результаты участников</h2>
+      <button onclick="loadAdminResults()">Обновить результаты</button>
+      <div id="adminResultsContent"></div>
+    </div>
+  </div>
+
+  <div id="adminSettings" class="adminTab hidden">
+    <div class="card">
+      <h2>Настройки викторины</h2>
+      <label for="thresholdInput">Минимум правильных ответов для приза</label>
+      <select id="thresholdInput">
+        <option value="1">1 из 10</option>
+        <option value="2">2 из 10</option>
+        <option value="3">3 из 10</option>
+        <option value="4">4 из 10</option>
+        <option value="5">5 из 10</option>
+        <option value="6">6 из 10</option>
+        <option value="7">7 из 10</option>
+        <option value="8">8 из 10</option>
+        <option value="9">9 из 10</option>
+        <option value="10">10 из 10</option>
+      </select>
+      <br><br>
+      <button class="success" onclick="saveSettings()">Сохранить порог</button>
+      <div id="settingsMessage"></div>
+
+      <hr>
+      <h3>Сменить пароль администратора</h3>
+      <label for="newAdminPassword">Новый пароль</label>
+      <input id="newAdminPassword" type="password" minlength="6" placeholder="Не менее 6 символов">
+      <br><br>
+      <button onclick="changeAdminPassword()">Изменить пароль</button>
+      <div id="passwordMessage"></div>
+      <div class="notice">После смены пароля для следующего входа используй новый пароль.</div>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<footer>Неделя русского языка и литературы • 2026</footer>
+<footer>
+  Неделя русского языка и литературы · 2–6 ноября 2026
+</footer>
 
 <script>
-const API_URL='https://script.google.com/macros/s/AKfycbyOQOgILmAmlrL1Y8xpBun4lLcbyhlmBvGIa5PVPsiv91akMjdkunIwkm2OPS1V_dGC/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycbyOQOgILmAmlrL1Y8xpBun4lLcbyhlbMvGIa5PVPsiv91akMjdkunIwkm2OPS1V_dGC/exec';
 
-let attemptId='';
-let currentQuestion=null;
-let currentRating='overall';
-let sending=false;
+let quizId = '';
+let currentScore = 0;
+let selectedChoice = 0;
+let adminToken = '';
+let adminQuestions = [];
 
-function showPage(id){
-  ['home','quiz','rating'].forEach(x=>{
-    document.getElementById(x).classList.toggle('hidden',x!==id);
-  });
-  if(id==='rating')refreshRating();
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById(id);
+  if (page) page.classList.add('active');
+
+  if (id === 'admin' && !adminToken) {
+    showPage('adminLogin');
+    return;
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function api(params){
-  return new Promise((resolve,reject)=>{
-    const callback='quizCallback'+Math.random().toString(36).slice(2);
-    const script=document.createElement('script');
-    const query=new URLSearchParams({...params,callback}).toString();
-
-    const timeout=setTimeout(()=>{
+function api(params) {
+  return new Promise((resolve,reject) => {
+    const callback = 'cb_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+    const script = document.createElement('script');
+    const query = new URLSearchParams({...params,callback}).toString();
+    const timeout = setTimeout(() => {
       cleanup();
-      reject(new Error('Сервер не ответил. Проверь интернет.'));
-    },25000);
+      reject(new Error('Сервер не ответил. Проверь подключение к интернету и публикацию Apps Script.'));
+    },20000);
 
-    function cleanup(){
+    function cleanup() {
       clearTimeout(timeout);
       delete window[callback];
-      script.remove();
+      if (script.parentNode) script.parentNode.removeChild(script);
     }
 
-    window[callback]=data=>{
+    window[callback] = data => {
       cleanup();
       resolve(data);
     };
-
-    script.onerror=()=>{
+    script.onerror = () => {
       cleanup();
       reject(new Error('Не удалось подключиться к серверу.'));
     };
-
-    script.src=API_URL+'?'+query;
+    script.src = API_URL + '?' + query;
     document.body.appendChild(script);
   });
 }
 
-async function startQuiz(){
-  const name=document.getElementById('name').value.trim();
-  const grade=document.getElementById('grade').value;
-  const button=document.getElementById('startButton');
-  const message=document.getElementById('startMessage');
+function showMessage(id,text,isError=false) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = text;
+  el.className = isError ? 'errorText' : 'successText';
+}
 
-  if(!name||!grade){
-    message.textContent='Заполни ФИО и выбери класс.';
+async function startQuiz() {
+  const name = document.getElementById('participantName').value.trim();
+  const grade = document.getElementById('participantGrade').value;
+  const button = document.getElementById('startButton');
+  const message = document.getElementById('quizMessage');
+
+  message.textContent = '';
+  if (!name || !grade) {
+    message.textContent = 'Заполни ФИО и выбери класс.';
     return;
   }
 
-  button.disabled=true;
-  message.textContent='Подготавливаем вопросы...';
+  button.disabled = true;
+  button.textContent = 'Подключение...';
 
-  try{
-    const data=await api({action:'start',name,grade});
+  try {
+    const data = await api({action:'start',name,grade});
+    if (!data.ok) throw new Error(data.error || 'Не удалось начать викторину.');
 
-    if(!data.ok){
-      message.textContent=data.error;
-      button.disabled=false;
-      return;
-    }
-
-    attemptId=data.id;
+    quizId = data.id;
+    currentScore = 0;
     document.getElementById('registration').classList.add('hidden');
     document.getElementById('quizArea').classList.remove('hidden');
-    document.getElementById('resultArea').classList.add('hidden');
+    document.getElementById('quizResult').classList.add('hidden');
     showQuestion(data.question);
-  }catch(err){
-    message.textContent=err.message;
-    button.disabled=false;
+  } catch(e) {
+    message.textContent = e.message;
+  } finally {
+    button.disabled = false;
+    button.textContent = 'Начать викторину';
   }
 }
 
-function showQuestion(q){
-  currentQuestion=q;
-  document.getElementById('questionProgress').textContent=
-    'Вопрос '+q.number+' из '+q.total+
-    ' • Осталось попыток: '+(2-q.triesUsed);
+function showQuestion(q) {
+  selectedChoice = 0;
+  document.getElementById('questionCounter').textContent =
+    'Вопрос ' + q.number + ' из ' + q.total;
+  document.getElementById('scoreCounter').textContent =
+    'Правильных ответов: ' + currentScore;
+  document.getElementById('progressBar').style.width =
+    ((q.number - 1) / q.total * 100) + '%';
+  document.getElementById('questionText').textContent = q.question;
+  document.getElementById('answerMessage').textContent = '';
+  document.getElementById('attemptsText').textContent =
+    'Осталось попыток на этот вопрос: ' + q.triesLeft;
 
-  const box=document.getElementById('questionBox');
-  box.replaceChildren();
+  const options = document.getElementById('options');
+  options.innerHTML = '';
 
-  const title=document.createElement('h3');
-  title.textContent=q.question;
-  box.appendChild(title);
-
-  q.options.forEach((option,index)=>{
-    const label=document.createElement('label');
-    label.className='option';
-
-    const radio=document.createElement('input');
-    radio.type='radio';
-    radio.name='answer';
-    radio.value=String(index+1);
-
-    const text=document.createElement('span');
-    text.textContent=option;
-
-    label.appendChild(radio);
-    label.appendChild(text);
-    box.appendChild(label);
+  q.options.forEach((option,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option';
+    btn.textContent = (i+1) + '. ' + option;
+    btn.onclick = () => {
+      document.querySelectorAll('.option').forEach(x => x.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedChoice = i+1;
+      submitAnswer();
+    };
+    options.appendChild(btn);
   });
-
-  const status=document.getElementById('answerStatus');
-  status.className='status';
-  status.textContent='Выбери один вариант ответа.';
-
-  const button=document.getElementById('answerButton');
-  button.disabled=false;
-  button.textContent='Ответить';
 }
 
-async function sendAnswer(){
-  if(sending||!attemptId)return;
+async function submitAnswer() {
+  if (!selectedChoice) return;
 
-  const selected=document.querySelector('input[name="answer"]:checked');
-  if(!selected){
-    setStatus('Сначала выбери вариант ответа.','bad');
-    return;
-  }
+  const choice = selectedChoice;
+  selectedChoice = 0;
 
-  sending=true;
-  const button=document.getElementById('answerButton');
-  button.disabled=true;
-  button.textContent='Проверяем...';
+  document.querySelectorAll('.option').forEach(x => x.disabled = true);
+  document.getElementById('answerMessage').textContent = 'Проверяем ответ...';
 
-  try{
-    const data=await api({
+  try {
+    const data = await api({
       action:'answer',
-      id:attemptId,
-      choice:selected.value
+      id:quizId,
+      choice:String(choice)
     });
 
-    if(!data.ok){
-      setStatus(data.error,'bad');
-      button.disabled=false;
-      button.textContent='Ответить';
+    if (!data.ok) throw new Error(data.error || 'Ошибка ответа.');
+
+    if (data.correct) currentScore++;
+
+    if (data.finished) {
+      showQuizResult(data);
       return;
     }
 
-    if(data.finished){
-      showResult(data);
-      return;
-    }
+    document.getElementById('answerMessage').textContent = data.message;
+    document.getElementById('scoreCounter').textContent =
+      'Правильных ответов: ' + currentScore;
 
-    if(data.correct){
-      setStatus('Правильно! Молодец!','good');
-    }else{
-      setStatus(data.message,'bad');
-    }
-
-    setTimeout(()=>{
-      showQuestion(data.question);
-    },900);
-
-  }catch(err){
-    setStatus(err.message,'bad');
-    button.disabled=false;
-    button.textContent='Повторить отправку';
-  }finally{
-    sending=false;
+    setTimeout(() => showQuestion(data.question), data.correct ? 700 : 1100);
+  } catch(e) {
+    document.getElementById('answerMessage').textContent = e.message;
   }
 }
 
-function setStatus(message,type){
-  const box=document.getElementById('answerStatus');
-  box.textContent=message;
-  box.className='status '+type;
-}
-
-function showResult(data){
-  attemptId='';
-
+function showQuizResult(data) {
   document.getElementById('quizArea').classList.add('hidden');
-  const area=document.getElementById('resultArea');
-  area.classList.remove('hidden');
+  const result = document.getElementById('quizResult');
+  result.classList.remove('hidden');
 
-  const heading=data.prize
-    ? 'Поздравляем! Ты получаешь сладкий приз! 🎉'
-    : 'Спасибо за участие!';
+  document.getElementById('progressBar').style.width = '100%';
 
-  area.innerHTML=`
-    <div class="result">
-      <h2>Викторина завершена</h2>
-      <div class="bigscore">${data.score} / ${data.total}</div>
-      <p>${heading}</p>
-      <p>${data.prize
-        ? 'Ты набрал(а) не менее '+data.threshold+' правильных ответов.'
-        : 'Для получения приза нужно набрать не менее '+data.threshold+' правильных ответов.'}</p>
-      <button onclick="showPage('rating')">Посмотреть рейтинг</button>
-    </div>
+  result.innerHTML = `
+    <h2>Викторина завершена!</h2>
+    <p style="font-size:24px">Твой результат: <strong>${data.score} из ${data.total}</strong></p>
+    <p>${data.prize
+      ? '🎉 Поздравляем! Ты заслужил(а) сладкий приз!'
+      : 'Спасибо за участие! В следующий раз получится ещё лучше.'}</p>
+    <p>Для получения приза необходимо было набрать ${data.threshold} правильных ответов.</p>
+    <button onclick="resetQuiz()">На главную викторины</button>
   `;
-}
-
-async function refreshRating(){
-  const box=document.getElementById('ratingContent');
-  box.textContent='Загружаем рейтинг...';
-
-  try{
-    const data=await api({action:'leaderboard'});
-    if(!data.ok)throw new Error(data.error);
-    renderRating(data[currentRating]||[]);
-  }catch(err){
-    box.textContent=err.message;
-  }
-}
-
-function loadRating(type,button){
-  currentRating=type;
-  document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
-  button.classList.add('active');
   refreshRating();
 }
 
-function renderRating(list){
-  const box=document.getElementById('ratingContent');
+function resetQuiz() {
+  quizId = '';
+  document.getElementById('registration').classList.remove('hidden');
+  document.getElementById('quizArea').classList.add('hidden');
+  document.getElementById('quizResult').classList.add('hidden');
+  document.getElementById('participantName').value = '';
+  document.getElementById('participantGrade').value = '';
+  document.getElementById('quizMessage').textContent = '';
+}
 
-  if(!list.length){
-    box.textContent='Пока результатов нет.';
+async function refreshRating() {
+  const content = document.getElementById('ratingContent');
+  content.textContent = 'Загружаем рейтинг...';
+
+  try {
+    const data = await api({action:'leaderboard'});
+    if (!data.ok) throw new Error(data.error || 'Ошибка загрузки');
+
+    let html = '<h3>Общий рейтинг</h3>';
+    html += ratingTable(data.overall);
+    html += '<h3>5 класс</h3>' + ratingTable(data.grade5);
+    html += '<h3>6 класс</h3>' + ratingTable(data.grade6);
+    html += '<h3>7 класс</h3>' + ratingTable(data.grade7);
+    content.innerHTML = html;
+  } catch(e) {
+    content.textContent = e.message;
+  }
+}
+
+function ratingTable(items) {
+  if (!items || !items.length) return '<p class="muted">Пока результатов нет.</p>';
+  return '<div class="tableWrap"><table><tr><th>Место</th><th>Участник</th><th>Класс</th><th>Баллы</th></tr>' +
+    items.map((x,i) => `<tr><td>${i+1}</td><td>${escapeHTML(x.name)}</td><td>${escapeHTML(x.grade)}</td><td>${x.score}/10</td></tr>`).join('') +
+    '</table></div>';
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[ch]);
+}
+
+// ---------- ВХОД АДМИНИСТРАТОРА ----------
+
+async function adminLogin() {
+  const password = document.getElementById('adminPassword').value;
+  const button = document.getElementById('loginButton');
+  if (!password) {
+    showMessage('loginMessage','Введи пароль.',true);
     return;
   }
 
-  const table=document.createElement('table');
-  table.innerHTML='<thead><tr><th>Место</th><th>Участник</th><th>Класс</th><th>Баллы</th><th>Приз</th></tr></thead>';
+  button.disabled = true;
+  try {
+    const data = await api({action:'adminLogin',password});
+    if (!data.ok) throw new Error(data.error || 'Вход не выполнен.');
 
-  const body=document.createElement('tbody');
-
-  list.forEach((item,index)=>{
-    const tr=document.createElement('tr');
-    [
-      index+1,
-      item.name,
-      item.grade,
-      item.score+'/10',
-      item.prize
-    ].forEach(value=>{
-      const td=document.createElement('td');
-      td.textContent=value;
-      tr.appendChild(td);
-    });
-    body.appendChild(tr);
-  });
-
-  table.appendChild(body);
-  const wrap=document.createElement('div');
-  wrap.className='table-wrap';
-  wrap.appendChild(table);
-  box.replaceChildren(wrap);
+    adminToken = data.token;
+    document.getElementById('adminPassword').value = '';
+    showMessage('loginMessage','Вход выполнен.');
+    showPage('admin');
+    adminTab('questions');
+    loadAdminQuestions();
+    loadSettings();
+  } catch(e) {
+    showMessage('loginMessage',e.message,true);
+  } finally {
+    button.disabled = false;
+  }
 }
+
+function adminLogout() {
+  adminToken = '';
+  adminQuestions = [];
+  showPage('adminLogin');
+  showMessage('loginMessage','Ты вышел из панели администратора.');
+}
+
+function adminTab(name) {
+  if (!adminToken) return showPage('adminLogin');
+  document.querySelectorAll('.adminTab').forEach(x => x.classList.add('hidden'));
+  document.getElementById('admin' + name[0].toUpperCase() + name.slice(1))
+    .classList.remove('hidden');
+
+  if (name === 'questions') loadAdminQuestions();
+  if (name === 'results') loadAdminResults();
+  if (name === 'settings') loadSettings();
+}
+
+// ---------- ВОПРОСЫ ----------
+
+async function loadAdminQuestions() {
+  const list = document.getElementById('questionList');
+  list.textContent = 'Загружаем вопросы...';
+
+  try {
+    const data = await api({action:'adminGetQuestions',token:adminToken});
+    if (!data.ok) throw new Error(data.error || 'Ошибка загрузки.');
+    adminQuestions = data.questions || [];
+
+    if (!adminQuestions.length) {
+      list.innerHTML = '<p>Вопросов пока нет. Нажми «Новый вопрос».</p>';
+      return;
+    }
+
+    list.innerHTML = '<div class="tableWrap"><table><tr><th>Дата</th><th>Класс</th><th>Вопрос</th><th>Действия</th></tr>' +
+      adminQuestions.map((q,i) => `
+        <tr>
+          <td>${escapeHTML(q.date)}</td>
+          <td>${escapeHTML(q.grade)}</td>
+          <td>${escapeHTML(q.question)}</td>
+          <td><div class="adminActions">
+            <button onclick="editQuestion(${i})">Изменить</button>
+            <button class="danger" onclick="deleteQuestion(${q.row})">Удалить</button>
+          </div></td>
+        </tr>
+      `).join('') + '</table></div>';
+  } catch(e) {
+    list.textContent = e.message;
+  }
+}
+
+function newQuestion() {
+  document.getElementById('editRow').value = '';
+  document.getElementById('editorTitle').textContent = 'Новый вопрос';
+  document.getElementById('qDate').value = '2026-11-02';
+  document.getElementById('qGrade').value = '5';
+  document.getElementById('qText').value = '';
+  ['q1','q2','q3','q4'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('qCorrect').value = '1';
+  document.getElementById('editorMessage').textContent = '';
+  document.getElementById('questionEditor').classList.remove('hidden');
+  document.getElementById('questionEditor').scrollIntoView({behavior:'smooth'});
+}
+
+function editQuestion(index) {
+  const q = adminQuestions[index];
+  if (!q) return;
+
+  document.getElementById('editRow').value = q.row;
+  document.getElementById('editorTitle').textContent = 'Изменить вопрос';
+  document.getElementById('qDate').value = q.date;
+  document.getElementById('qGrade').value = q.grade;
+  document.getElementById('qText').value = q.question;
+  ['q1','q2','q3','q4'].forEach((id,i) => {
+    document.getElementById(id).value = q.options[i] || '';
+  });
+  document.getElementById('qCorrect').value = String(q.correct);
+  document.getElementById('editorMessage').textContent = '';
+  document.getElementById('questionEditor').classList.remove('hidden');
+  document.getElementById('questionEditor').scrollIntoView({behavior:'smooth'});
+}
+
+function closeEditor() {
+  document.getElementById('questionEditor').classList.add('hidden');
+}
+
+async function saveQuestion() {
+  const params = {
+    action:'adminSaveQuestion',
+    token:adminToken,
+    row:document.getElementById('editRow').value,
+    date:document.getElementById('qDate').value,
+    grade:document.getElementById('qGrade').value,
+    question:document.getElementById('qText').value,
+    option1:document.getElementById('q1').value,
+    option2:document.getElementById('q2').value,
+    option3:document.getElementById('q3').value,
+    option4:document.getElementById('q4').value,
+    correct:document.getElementById('qCorrect').value
+  };
+
+  try {
+    const data = await api(params);
+    if (!data.ok) throw new Error(data.error || 'Не удалось сохранить.');
+    showMessage('editorMessage',data.message || 'Сохранено.');
+    closeEditor();
+    loadAdminQuestions();
+  } catch(e) {
+    showMessage('editorMessage',e.message,true);
+  }
+}
+
+async function deleteQuestion(row) {
+  if (!confirm('Точно удалить этот вопрос?')) return;
+
+  try {
+    const data = await api({
+      action:'adminDeleteQuestion',
+      token:adminToken,
+      row:String(row)
+    });
+    if (!data.ok) throw new Error(data.error || 'Не удалось удалить.');
+    alert(data.message);
+    loadAdminQuestions();
+  } catch(e) {
+    alert(e.message);
+  }
+}
+
+// ---------- РЕЗУЛЬТАТЫ ----------
+
+async function loadAdminResults() {
+  const content = document.getElementById('adminResultsContent');
+  content.textContent = 'Загружаем результаты...';
+
+  try {
+    const data = await api({action:'adminGetResults',token:adminToken});
+    if (!data.ok) throw new Error(data.error || 'Ошибка загрузки.');
+
+    if (!data.results.length) {
+      content.innerHTML = '<p>Завершённых попыток пока нет.</p>';
+      return;
+    }
+
+    content.innerHTML = '<div class="tableWrap"><table><tr><th>Дата</th><th>ФИО</th><th>Класс</th><th>Баллы</th><th>Приз</th></tr>' +
+      data.results.map(r => `
+        <tr>
+          <td>${escapeHTML(r.date)}</td>
+          <td>${escapeHTML(r.name)}</td>
+          <td>${escapeHTML(r.grade)}</td>
+          <td>${r.score}/${r.total}</td>
+          <td>${escapeHTML(r.prize)}</td>
+        </tr>
+      `).join('') + '</table></div>';
+  } catch(e) {
+    content.textContent = e.message;
+  }
+}
+
+// ---------- НАСТРОЙКИ ----------
+
+async function loadSettings() {
+  try {
+    const data = await api({action:'adminGetSettings',token:adminToken});
+    if (!data.ok) throw new Error(data.error || 'Не удалось загрузить настройки.');
+    document.getElementById('thresholdInput').value = String(data.threshold);
+    document.getElementById('homeThreshold').textContent = data.threshold;
+  } catch(e) {
+    showMessage('settingsMessage',e.message,true);
+  }
+}
+
+async function saveSettings() {
+  try {
+    const threshold = document.getElementById('thresholdInput').value;
+    const data = await api({
+      action:'adminSaveSettings',
+      token:adminToken,
+      threshold
+    });
+    if (!data.ok) throw new Error(data.error || 'Не удалось сохранить.');
+    document.getElementById('homeThreshold').textContent = data.threshold;
+    showMessage('settingsMessage','Порог получения приза сохранён: ' + data.threshold + ' из 10.');
+  } catch(e) {
+    showMessage('settingsMessage',e.message,true);
+  }
+}
+
+async function changeAdminPassword() {
+  const newPassword = document.getElementById('newAdminPassword').value;
+
+  if (newPassword.length < 6) {
+    showMessage('passwordMessage','Пароль должен содержать не менее 6 символов.',true);
+    return;
+  }
+
+  try {
+    const data = await api({
+      action:'adminChangePassword',
+      token:adminToken,
+      newPassword
+    });
+    if (!data.ok) throw new Error(data.error || 'Не удалось изменить пароль.');
+
+    adminToken = '';
+    document.getElementById('newAdminPassword').value = '';
+    showPage('adminLogin');
+    showMessage('loginMessage','Пароль изменён. Теперь войди с новым паролем.');
+  } catch(e) {
+    showMessage('passwordMessage',e.message,true);
+  }
+}
+
+document.getElementById('adminPassword').addEventListener('keydown',e => {
+  if (e.key === 'Enter') adminLogin();
+});
 </script>
 </body>
 </html>
